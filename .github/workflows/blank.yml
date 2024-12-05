@@ -1,0 +1,44 @@
+name: Deploy Lambda to AWS
+
+on:
+  push:
+    branches:
+      - main  # Deploy on push to the main branch (adjust as needed)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up AWS CLI
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Install Node.js dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # You can set the appropriate version of Node.js
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Create the deployment zip file for Lambda
+      - name: Zip Lambda function
+        run: |
+          zip -r function.zip .
+
+      # Deploy to AWS Lambda
+      - name: Deploy Lambda
+        run: |
+          aws lambda update-function-code --function-name dk-lambda-github-action --zip-file fileb://function.zip --region ${{ secrets.AWS_REGION }}
+
