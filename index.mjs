@@ -13,7 +13,7 @@ export const handler = async (event) => {
     const response = {
       statusCode: 200,
       body: JSON.stringify({
-        message: 'From github actions. Successfully fetched S3 buckets.',
+        message: 'Triggered from github actions. Successfully fetched S3 buckets.',
         buckets: data.Buckets,
       }),
     };
