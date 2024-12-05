@@ -1,7 +1,7 @@
-const AWS = require('aws-sdk');
+import AWS from 'aws-sdk';  // Using import instead of require
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     const params = {
         TableName: 'UsersTable', // Replace with your table name
         Item: {
