@@ -5,7 +5,7 @@ export const handler = async (event) => {
     const params = {
         TableName: 'UsersTable', // Replace with your table name
         Item: {
-            userId: '678', // Example userId
+            userId: '123', // Example userId
             name: 'Deepak',
             email: 'Deepak@example.com'
         }
