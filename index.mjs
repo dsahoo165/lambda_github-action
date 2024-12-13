@@ -1,14 +1,14 @@
 import AWS from 'aws-sdk';  // Using import instead of require
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const dynamoDB = new AWS.DynamoDB.DocumentClient({ region: 'us-east-1' });
 
 export const handler = async (event) => {
     // Extract parameters from the event or use environment variables as a fallback
-    const tableName = process.env.TABLE_NAME || event.tableName;
+    
     const userId = event.userId;
     const name = event.name;
     const email = event.email;
 
-    if (!tableName || !userId || !name || !email) {
+    if (!userId || !name || !email) {
         return {
             statusCode: 400,
             body: JSON.stringify('Missing required parameters'),
@@ -16,7 +16,7 @@ export const handler = async (event) => {
     }
 
     const params = {
-        TableName: tableName,
+        TableName: 'UsersTable',
         Item: {
             userId: userId,
             name: name,
