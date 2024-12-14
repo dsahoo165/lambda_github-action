@@ -11,7 +11,7 @@ export const handler = async (event) => {
     if (!userId || !name || !email) {
         return {
             statusCode: 400,
-            body: JSON.stringify('Missing required parameters'),
+            body: JSON.stringify('Missing required parameters. This time from aws codebuild.'),
         };
     }
 
@@ -26,7 +26,7 @@ export const handler = async (event) => {
     
     try {
         await dynamoDB.put(params).promise();
-        console.log('Record inserted successfully');
+        console.log('Record inserted successfully. aws codebuild');
         return {
             statusCode: 200,
             body: JSON.stringify('Record inserted successfully'),
