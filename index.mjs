@@ -11,7 +11,7 @@ export const handler = async (event) => {
     if (!userId || !name || !email) {
         return {
             statusCode: 400,
-            body: JSON.stringify('Missing required parameters. This time from aws codebuild.'),
+            body: JSON.stringify('Missing required parameters. Hello.'),
         };
     }
 
